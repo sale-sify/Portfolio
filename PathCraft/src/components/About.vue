@@ -48,9 +48,8 @@
                     <li class="skill-item">Organisation</li>
                     <li class="skill-item">Rigueur et serieux</li>
                     <li class="skill-item">Resolution de problemes</li>
-                    <li class="skill-item">Penser utilisateurs en premier</li>
+                    <li class="skill-item">Penser utilisateurs</li>
                     <li class="skill-item">Sens du details</li>
-                    <li class="skill-item">Travail sous pression</li>
                 </ul>
             </div>
             <div class="skills-box">
@@ -107,6 +106,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        overflow-y: auto;
     }
 
     .title-box {
@@ -114,9 +114,9 @@
         width: 40%;
         text-align: center;
         margin-bottom: 2%;
-        font-size: 1.5rem;
+        font-size: 200%;
         border-bottom: 1px solid white;
-        margin-bottom: 5rem;
+        margin-bottom: 3%;
     }
 
     .formation {
@@ -129,7 +129,7 @@
     }
 
     .exp-item {
-        margin-bottom: 2rem;
+        margin-bottom: 2%;
         text-align: center;
         width: 25%;
         border: 2px solid rgba(255, 255, 255, 0.479);
@@ -139,7 +139,8 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
-        gap: 1rem;
+        gap: 0.5rem;
+        font-size: 100%;
         background: rgba(62, 9, 78, 0.637);
         transition: 0.3s ease-in;
         box-shadow: 0px 1px 16px black;
@@ -152,17 +153,17 @@
     }
     .exp-title {
         width: 70%;
-        font-size: 1.3rem;
+        font-size: 120%;
         margin-bottom: 0.5rem;
         border-bottom: 1px solid white;
         padding-bottom: 5px;
     }
     .exp-date {
-        font-size: 1rem;
+        font-size: 80%;
         font-style: italic;
     }
     img {
-        width: 100px;
+        width: 5%;
         height: 100px;
         margin: 2%;
         margin-top: 4%;
@@ -175,7 +176,7 @@
         align-items: top;
         width: 85%;
         margin-bottom: 5%;
-        gap: 10rem;
+        gap: 9.5%;
     }
     .skills-box {
         width: 25%;

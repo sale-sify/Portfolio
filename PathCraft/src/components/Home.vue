@@ -43,8 +43,7 @@
         color: rgb(221, 217, 217);
         z-index: -1;
         padding-top: 10%;  
-        overflow-y: scroll;
-        overflow-y: hidden;
+        overflow-y: auto;
     }
 
     .title-box {
@@ -73,7 +72,7 @@
     }
 
     img {
-        width: 400px;
+        width: 40%;
         height: auto;
         margin-top: -30px;
         transition: 0.3s ease-in; 

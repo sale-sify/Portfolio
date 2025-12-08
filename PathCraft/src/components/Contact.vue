@@ -100,7 +100,7 @@
         align-items: center;
         gap: 1.5rem;
         width: 40%;
-        height: 80%;
+        height: 100%;
     }
 
     h2 {

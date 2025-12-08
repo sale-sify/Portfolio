@@ -26,9 +26,7 @@
         <router-view></router-view>
     </div>
     
-    <footer>
-        <p>© 2025 Romain Sales. All rights reserved.</p>
-    </footer>
+    
 </template>
 
 <style scoped>
@@ -47,21 +45,21 @@
     }
 
     .left-side {
-        width: 20%;
+        width: 30%;
         margin-left: 1%;
-        font-size: 1.3rem;
+        font-size: 120%;
     }
 
     .social-link {
         display: flex;
         gap: 1rem;
-        width: 10%;
+        width: 7%;
         justify-content: center;
         align-items: center;
     }
     .social-link img {
-        width: 3rem;
-        height: 3rem;
+        width: 100%;
+        height: auto;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
         background: none;
@@ -85,7 +83,7 @@
         width: 70%;
         display: flex;
         justify-content: flex-end;
-        margin-right: 13%;
+        margin-right: 10%;
     }
 
     .navigation a {

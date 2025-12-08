@@ -43,7 +43,7 @@
             </p>
         </div>
         <div class="scrolldown-btn">
-            <p>Voir plus</p>
+            
             <button class="btn-scroll" @click="scrollDown">↓</button>
         </div>
     </section>
@@ -258,7 +258,7 @@
     .top-btn {
         position: fixed;
         top: 3.5%;
-        right: 3.5%;
+        right: 2.5%;
         background: rgb(49, 7, 83);
         border: rgba(255, 255, 255, 0.342) 2px solid;
         height: 3rem;
@@ -315,7 +315,7 @@
         cursor: pointer;
         transition: all 0.3s ease-in-out;
         position: fixed;
-        bottom: 6%;
+        bottom: 4%;
     }
     button:hover {
         color: white;
@@ -375,7 +375,7 @@
         backdrop-filter: blur(5px);
         border-radius: 20px;
         width: 65%;
-        height: 61%;
+        height: 55%;
         margin: auto;
         padding: 2rem;
         display: flex;
@@ -383,26 +383,26 @@
         align-items: center;
         gap: 1.5rem;
         color: rgb(221, 217, 217);
-        margin-bottom: 8.5%;
+        margin-bottom: 11.5%;
     }
 
     .top-card {
         display: flex;
         align-items: center;
-        width: 95%;
-        gap: 7rem;
+        width: 97%;
+        gap: 5rem;
         font-size: 2rem;
     }
     .top-card > .title-card {
         flex-grow: 1;
         text-align: center;
-        width: 25%;
+        width: 55%;
         text-decoration: underline;
         text-underline-offset: 8px;
+        font-size: 1.5rem;
     }
     .top-card > img {
-        height: 8rem;
-        width: 8rem;
+        width: 10%;
         border-radius: 10px;
         box-shadow: 0px 1px 16px black;
         border: 2px solid rgba(255, 255, 255, 0.479);
@@ -423,18 +423,17 @@
     .logo-stack-card > img {
         height: 80%;
         width: 80%;
-        border-radius: 10px;
     }
 
     .info-card {
         width: 95%;
-        height: 50%;
+        height: 45%;
         display: flex;
         align-items: center;
-        gap: 1rem;
         line-height: 2rem;
         font-size: 1.2rem;
         margin-top: 2%;
+        font-size: 1rem;
     }
 
     .description-box-card {
