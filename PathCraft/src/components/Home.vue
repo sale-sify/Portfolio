@@ -106,4 +106,32 @@
             transform: translateY(0);
         }
     }
+
+
+
+    @media (max-width: 768px) {
+        
+        .main-container {
+            padding-top: 50%;  
+            
+        }
+        .title-box {
+            width: 90%;
+        }
+        .main-title h1 {
+            font-size: 2.5rem;
+        }
+        .main-title h3 {
+            font-size: 1.5rem;
+            margin-bottom: 4rem;
+        }
+        .main-title p {
+            font-size: 1rem;
+        }
+        img {
+            width: 60%;
+            margin-top: 2rem;
+        }
+        
+    }
 </style>

@@ -197,5 +197,22 @@
             opacity: 1;
         }
     }
+
+
+    @media (max-width:768px) {
+        .form-container {
+            width: 95%;
+            height: 100%;
+        }
+        form {
+            width: 90%;
+            margin-top: 30%;
+            margin-bottom: auto;
+        }
+        .form-group {
+            width: 90%;
+        }
+        
+    }
     
 </style>

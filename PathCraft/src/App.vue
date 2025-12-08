@@ -116,5 +116,28 @@
         bottom: 0;
         width: 100%;   
     }
+
+    @media (max-width: 768px) {
+        header {
+            flex-direction: column;
+            height: auto;
+            padding: 15px 0;
+            gap: 10px;
+        }
+        .left-side {
+            display: none;
+        }
+        .social-link {
+            width: 20%;
+            gap: 0.5rem;
+        }
+        .right-side {
+            margin-right: 5%;
+        }
+        .navigation a {
+            font-size: 1rem;
+            padding: 8px;
+        }
+    }
   
 </style>

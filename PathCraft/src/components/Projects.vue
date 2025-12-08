@@ -474,6 +474,79 @@
         margin-top: 1rem;
     }
 
+    @media (max-width: 768px) {
+        .main-container {
+            padding-top: 10%;  
+            gap: 2rem;
+        }
+        .title-box {
+            width: 80%;
+            font-size: 1.2rem;
+            margin-top: 30%;
+        }
+        .introduction-box {
+            width: 80%;
+            font-size: 1rem;
+            margin: 2%;
+        }
+        .projet {
+            height: auto;
+            padding-top: 3%;
+        }
+        .card {
+            width: 90%;
+            height: auto;
+            padding: 1rem;
+            text-align: center;
+        }
+        .info-card {
+            flex-direction: column;
+            height: auto;
+            width: 100%;
+        }
+        .description-box-card, .picture-box-card {
+            width: 100%;
+            padding: 0;
+            border: none;
+        }
+        .picture-box-card {
+            margin-top: 1rem;
+        }
+        .top-card {
+            flex-direction: row;
+            width: 100%;
+            gap: 1rem;
+            font-size: 1.5rem;
+            margin: auto;
+        }
+        .top-card > img {
+            width: 20%;
+        }
+        
+
+        .top-card > .title-card {
+            width: 50%;
+            font-size: 1.2rem;
+            margin: auto;
+        }
+        .stack-card {
+            margin-left: 0;
+            margin: auto;
+            width: 25%;
+        }
+        .logo-stack-card {
+            margin-left: 0;
+            margin: auto;
+            width: 50%;
+        }
+        .scrolldown-btn {
+            display: none;
+        }
+        
+
+        
+    }
+
 
     
 </style>

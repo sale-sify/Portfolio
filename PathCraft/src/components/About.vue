@@ -278,4 +278,40 @@
         }
     }
 
+
+    @media(max-width: 768px) {
+        
+        .title-box {
+            width: 80%;
+            padding-top: 20%;
+            margin-bottom: 10%;
+        }
+
+        .formation {
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+            
+        }
+        .exp-item {
+            width: 80%;
+            padding: 4%;
+            z-index: 100;
+        }
+        img {
+            height: 40px;
+            width: auto;
+            rotate: 90deg;
+            margin: -30px;
+        }
+        .skills-container {
+            display: none;
+        }
+        .skills-box {
+            width: 60%;
+        }   
+
+        
+    }
+
 </style>
