@@ -62,16 +62,16 @@ export const projects: Project[] = [
     name: 'DUPLIK',
     kind: 'pro',
     year: '2026',
-    tagline: 'La centrale d’achat privée des franchisés',
+    tagline: 'La vitrine de la franchise accessible à tous',
     description:
-      'Plateforme à trois rôles (franchisés, partenaires, admin) : catalogue d’offres négociées, messagerie en temps réel, notifications, tableaux de bord vendeurs et modération.',
-    stack: ['Vue 3', 'Pinia', 'Express', 'PostgreSQL', 'Socket.io', 'S3'],
+      'Site vitrine de DUPLIK, la plateforme qui aide les entrepreneurs à lancer leur réseau en franchise : offre et tarifs, démo, test du concept, formulaire de contact, chat en direct, et un blog d’actus de la franchise alimenté automatiquement par Actus-auto. Travaillé pour le référencement et le temps de chargement.',
+    stack: ['Vue 3', 'Vite', 'Express', 'PostgreSQL', 'Vercel', 'Render', 'Vitest'],
     link: { label: 'duplik.consulting', url: 'https://www.duplik.consulting' },
     salesify: {
       name: 'Franchie',
-      epithet: 'la franchisée qui paie plein pot',
+      epithet: 'la plateforme que personne ne trouve',
       problem:
-        'J’achète tout au prix fort, toute seule dans mon coin, alors que des centaines de franchisés achètent exactement la même chose que moi.',
+        'J’ai une super offre pour rendre la franchise accessible à tous les entrepreneurs. Mais sans vitrine, personne ne me trouve sur Google, et personne ne sait que j’existe.',
       color: '#8c52ff',
       accessory: 'bubble',
       scale: 0.95,

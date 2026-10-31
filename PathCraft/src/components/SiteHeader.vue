@@ -1,4 +1,15 @@
 <script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+
+// Transparent en haut de page, puis un fond crème dès qu'on fait défiler
+const scrolled = ref(false)
+const onScroll = () => (scrolled.value = window.scrollY > 40)
+onMounted(() => {
+  onScroll()
+  window.addEventListener('scroll', onScroll, { passive: true })
+})
+onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
+
 const links = [
   { label: 'Projets', href: '#projets' },
   { label: 'Infra', href: '#infra' },
@@ -7,7 +18,7 @@ const links = [
 </script>
 
 <template>
-  <header class="header">
+  <header class="header" :class="{ scrolled }">
     <a href="/" class="logo" aria-label="Sale-Sify Develops, accueil">
       <svg viewBox="0 0 32 40" aria-hidden="true">
         <path class="leaf" d="M16 14C14 8 9 4 6 4c1 4 4 8 10 10zm0 0c2-7 6-11 10-12-1 5-4 9-10 12zm0 0c0-5 0-9 1-13" />
@@ -32,6 +43,15 @@ const links = [
   justify-content: space-between;
   padding: 16px var(--gutter);
   pointer-events: none;
+  border-bottom: 2.5px solid transparent;
+  transition: background 0.25s ease, border-color 0.25s ease, padding 0.25s ease;
+}
+
+.header.scrolled {
+  padding-block: 10px;
+  background: var(--cream);
+  border-bottom-color: var(--ink);
+  pointer-events: auto;
 }
 
 .header > * {

@@ -29,7 +29,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
       <p class="problem">«&nbsp;{{ project.salesify.problem }}&nbsp;»</p>
     </blockquote>
 
-    <article class="packet">
+    <article class="packet zigzag-top">
       <button ref="closeButton" class="round-btn close" aria-label="Fermer" @click="emit('close')">✕</button>
       <p class="remedy">Le remède</p>
       <h2 class="name">{{ project.name }}</h2>
@@ -54,7 +54,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
         <a v-if="project.link" class="pill" :href="project.link.url" target="_blank" rel="noopener noreferrer">
           {{ project.link.label }} <span aria-hidden="true">↗</span>
         </a>
-        <span v-else-if="project.confidential" class="private">Outil interne : on ne montre pas le code, mais il tourne.</span>
+        <span v-else-if="project.confidential" class="private">Culture en serre privée : le code reste à l’abri, mais ça tourne en prod.</span>
       </footer>
     </article>
   </div>
@@ -117,11 +117,6 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
   background: var(--accent);
   border: var(--border);
   border-top: 0;
-  /* le haut du sachet est découpé en dents de scie : une rangée de triangles + le reste plein */
-  --tooth: 14px;
-  mask:
-    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 0 0 / var(--tooth) calc(var(--tooth) / 2) repeat-x,
-    linear-gradient(#000 0 0) 0 calc(var(--tooth) / 2) / 100% 100% no-repeat;
   max-height: min(70svh, 560px);
   overflow-y: auto;
 }

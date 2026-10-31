@@ -29,6 +29,17 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  scrollbar-gutter: stable; /* pas de saut de mise en page quand une modale bloque le défilement */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+section[id] {
+  scroll-margin-top: 70px;
 }
 
 body {
@@ -111,6 +122,15 @@ a {
 .tag:hover {
   transform: rotate(-4deg);
   background: var(--soil);
+}
+
+/* Haut découpé en dents de scie, comme un sachet de graines : une rangée de triangles + le reste plein.
+   Le masque coupe aussi box-shadow : pour une ombre, mettre filter: drop-shadow() sur un parent. */
+.zigzag-top {
+  --tooth: 14px;
+  mask:
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 0 0 / var(--tooth) calc(var(--tooth) / 2) repeat-x,
+    linear-gradient(#000 0 0) 0 calc(var(--tooth) / 2) / 100% 100% no-repeat;
 }
 
 /* Bouton pastille (liens externes) */

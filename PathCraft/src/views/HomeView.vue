@@ -5,6 +5,8 @@ import { projects, salesifyProjects } from '../data/projects'
 import { loading } from '../stores/loading'
 import SalesifyPanel from '../components/SalesifyPanel.vue'
 import MarqueeBand from '../components/MarqueeBand.vue'
+import ProjectsSection from '../components/ProjectsSection.vue'
+import InfraSection from '../components/InfraSection.vue'
 
 const hero = ref<HTMLElement>()
 const canvas = ref<HTMLCanvasElement>()
@@ -95,6 +97,10 @@ onBeforeUnmount(() => {
   </section>
 
   <MarqueeBand :words="['Planté en prod', 'Arrosé chaque jour', 'Récolté à la main', 'Zéro pesticide, 100 % TypeScript']" />
+
+  <ProjectsSection />
+
+  <InfraSection />
 </template>
 
 <style scoped>
