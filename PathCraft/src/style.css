@@ -1,8 +1,185 @@
-* {
+:root {
+  --pink: #ff5c8a;
+  --pink-deep: #e8336d;
+  --yellow: #ffd23f;
+  --mint: #3ddc97;
+  --blue: #4d9de0;
+  --orange: #ff8c42;
+  --violet: #8c52ff;
+  --ink: #141414;
+  --cream: #fff4e0;
+  --soil: #5b3a29;
+  --leaf: #3fae5a;
+
+  --font-display: 'Bricolage Grotesque', 'Arial Black', system-ui, sans-serif;
+  --font-body: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --radius: 28px;
+  --border: 2.5px solid var(--ink);
+  --shadow: 6px 6px 0 var(--ink);
+  --gutter: clamp(16px, 4vw, 40px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  width: 100vw;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: var(--pink);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* Titres en relief : des lettres étroites et grasses, "extrudées" par une pile d'ombres noires */
+.extrude {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 75%;
+  font-variation-settings: 'wdth' 75, 'opsz' 96;
+  line-height: 0.85;
+  letter-spacing: -0.01em;
+  color: var(--yellow);
+  text-shadow:
+    0.01em 0.01em 0 var(--ink),
+    0.02em 0.02em 0 var(--ink),
+    0.03em 0.03em 0 var(--ink),
+    0.04em 0.04em 0 var(--ink),
+    0.05em 0.05em 0 var(--ink),
+    0.06em 0.06em 0 var(--ink),
+    0.07em 0.07em 0 var(--ink);
+}
+
+/* Bouton "étiquette de plante" : bout pointu et trou de ficelle */
+.tag {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.7em 1.3em 0.7em 2em;
+  background: var(--ink);
+  color: var(--yellow);
+  font-weight: 900;
+  text-decoration: none;
+  clip-path: polygon(0.9em 0, 100% 0, 100% 100%, 0.9em 100%, 0 50%);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.tag::before {
+  content: '';
+  position: absolute;
+  left: 0.75em;
+  top: 50%;
+  width: 0.45em;
+  height: 0.45em;
+  border-radius: 50%;
+  background: var(--pink);
+  transform: translateY(-50%);
+}
+
+.tag:hover {
+  transform: rotate(-4deg);
+  background: var(--soil);
+}
+
+/* Bouton pastille (liens externes) */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.65em 1.25em;
+  border: var(--border);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--cream);
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+
+.pill:hover {
+  transform: rotate(-3deg) scale(1.04);
+}
+
+.round-btn {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: var(--border);
+  border-radius: 50%;
+  background: var(--cream);
+  box-shadow: 3px 3px 0 var(--ink);
+  font-size: 1.1rem;
+  font-weight: 900;
+  line-height: 1;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.round-btn:hover:not(:disabled) {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.round-btn:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.round-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
