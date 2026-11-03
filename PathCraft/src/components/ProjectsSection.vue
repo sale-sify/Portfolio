@@ -13,7 +13,11 @@ const hoveredId = ref<string | null>(null)
 const tornId = ref<string | null>(null)
 const opened = ref<{ project: Project; number: number } | null>(null)
 
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+// La terre des jardinières : un dessus bosselé, étiré sur toute la largeur du bac
+const SOIL_PATH =
+  'M0 24V13C4 7 10 5 17 9 23 3 33 2 40 8 47 5 52 6 57 9 64 1 76 2 82 8 88 4 95 5 100 10V24Z'
+
+const reducedMotion =window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 // Ouvrir un sachet : on arrache la bande du haut, les graines jaillissent,
 // puis la notice prend le relais (voir PacketModal).
@@ -74,24 +78,70 @@ function onClosed() {
         <h3>Semis du weekend</h3>
         <p>Des petits projets plantés un samedi, juste pour le plaisir de voir ce qui pousse.</p>
       </header>
-      <ul class="labels">
-        <li v-for="project in seedlings" :key="project.id" class="label">
-          <svg class="sprout" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 22V11M12 11C11 6 7 3 3 3c1 5 4 8 9 8zm0 0c1-5 5-8 9-8-1 5-4 8-9 8z" />
-          </svg>
-          <h4>{{ project.name }}</h4>
-          <p class="label-tagline">{{ project.tagline }}</p>
-          <p class="label-description">{{ project.description }}</p>
-          <p class="label-stack">{{ project.stack.join(' · ') }}</p>
-          <a v-if="project.link" class="label-link" :href="project.link.url" target="_blank" rel="noopener noreferrer">
-            {{ project.link.label }} <span aria-hidden="true">↗</span>
-          </a>
+      <!-- Chaque projet est une étiquette de semis piquée dans sa butte de terre.
+           Les buttes d'une même rangée se touchent et forment un sillon. -->
+      <ul class="plots">
+        <li v-for="project in seedlings" :key="project.id" class="plot">
+          <div class="marker">
+            <article class="label">
+              <!-- doublon du lien texte : retiré du clavier et des lecteurs d'écran -->
+              <a
+                v-if="project.thumbnail"
+                class="thumb"
+                :href="project.link?.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                tabindex="-1"
+                aria-hidden="true"
+              >
+                <img :src="project.thumbnail" alt="" width="640" height="480" loading="lazy" decoding="async" />
+              </a>
+              <h4>{{ project.name }}</h4>
+              <p class="label-tagline">{{ project.tagline }}</p>
+              <p class="label-description">{{ project.description }}</p>
+              <p class="label-stack">{{ project.stack.join(' · ') }}</p>
+              <a v-if="project.link" class="label-link" :href="project.link.url" target="_blank" rel="noopener noreferrer">
+                {{ project.link.label }} <span aria-hidden="true">↗</span>
+              </a>
+            </article>
+            <span class="stake" aria-hidden="true" />
+          </div>
+          <span class="bed" aria-hidden="true">
+            <span class="soil">
+              <svg viewBox="0 0 100 24" preserveAspectRatio="none">
+                <path :d="SOIL_PATH" />
+              </svg>
+            </span>
+            <span class="crate" />
+            <!-- une jeune pousse, qui grandit et fleurit au survol de l'étiquette -->
+            <svg class="sprout" viewBox="0 0 48 64">
+              <path class="stem" d="M24 64V16" />
+              <path class="leaf low left" d="M24 44C22 35 14 30 4 31c2 9 10 14 20 13z" />
+              <path class="leaf low right" d="M24 44c2-9 10-14 20-13-2 9-10 14-20 13z" />
+              <path class="leaf top left" d="M24 23c-2-6-7-9-14-8 1 6 6 9 14 8z" />
+              <path class="leaf top right" d="M24 23c2-6 7-9 14-8-1 6-6 9-14 8z" />
+              <circle class="bud" cx="24" cy="13" r="4.5" />
+            </svg>
+          </span>
         </li>
         <!-- Un coin de terre libre, en attendant les prochains projets perso -->
-        <li class="label empty">
-          <span class="hole" aria-hidden="true" />
-          <h4>Terre libre</h4>
-          <p class="label-description">Ce coin attend sa prochaine graine. Un projet perso est en train de germer.</p>
+        <li class="plot empty">
+          <div class="marker">
+            <div class="label">
+              <h4>Terre libre</h4>
+              <p class="label-description">Ce coin attend sa prochaine graine. Un projet perso est en train de germer.</p>
+            </div>
+            <span class="stake" aria-hidden="true" />
+          </div>
+          <span class="bed" aria-hidden="true">
+            <span class="soil">
+              <svg viewBox="0 0 100 24" preserveAspectRatio="none">
+                <path :d="SOIL_PATH" />
+              </svg>
+              <span class="hole" />
+            </span>
+            <span class="crate" />
+          </span>
         </li>
       </ul>
     </div>
@@ -212,42 +262,257 @@ function onClosed() {
   max-width: 50ch;
 }
 
-.labels {
+.plots {
+  --gap: 28px;
+  --wood: #e9b872;
+  --stake: 64px;
+  --buried: 20px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
-  gap: 24px;
-  margin-top: 28px;
+  gap: 44px var(--gap);
+  margin-top: 36px;
   padding: 0;
   list-style: none;
 }
 
-.label {
-  position: relative;
+.plot {
   display: flex;
   flex-direction: column;
-  padding: 20px 20px 18px;
-  border: var(--border);
-  border-radius: 6px 6px 40px 40px;
-  background: #fff;
-  box-shadow: 4px 4px 0 var(--ink);
-  transition: transform 0.2s ease;
 }
 
-.label:hover {
-  transform: rotate(-1.5deg);
+/* l'étiquette et son piquet pivotent depuis la pointe enfoncée dans la terre */
+.marker {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  rotate: -1deg;
+  transform-origin: 50% 100%;
+}
+
+.plot:nth-child(even) .marker {
+  rotate: 1.2deg;
+}
+
+.plot:hover .marker,
+.plot:focus-within .marker {
+  animation: sway 0.9s ease-in-out;
+}
+
+/* un coup de vent dans le potager */
+@keyframes sway {
+  30% {
+    transform: rotate(-3deg);
+  }
+  60% {
+    transform: rotate(2deg);
+  }
+  85% {
+    transform: rotate(-0.8deg);
+  }
+}
+
+.label {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 14px 18px;
+  border: var(--border);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.thumb {
+  display: block;
+  margin-bottom: 14px;
+  overflow: hidden;
+  border: var(--border);
+  border-radius: 6px;
+  background: var(--cream);
+}
+
+.thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.plot:hover .thumb img {
+  transform: scale(1.05);
+}
+
+.stake {
+  width: 22px;
+  height: var(--stake);
+  margin-top: -2.5px;
+  border: var(--border);
+  border-top: 0;
+  /* une veine dans le bois */
+  background: linear-gradient(90deg, transparent 40%, rgb(91 58 41 / 0.25) 40% 52%, transparent 52%) var(--wood);
+}
+
+/* --- La jardinière, dans le style du bac du hero : caisse en bois, lattes, poteaux, terre et cailloux --- */
+.bed {
+  position: relative;
+  z-index: 2;
+  display: block;
+  margin: calc(var(--buried) * -1) -8px 0;
+}
+
+.soil {
+  position: relative;
+  display: block;
+  height: 34px;
+  margin-inline: 12px;
+}
+
+.soil svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.soil path {
+  fill: var(--soil);
+  stroke: var(--ink);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+/* quelques cailloux éparpillés sur la terre */
+.soil::after {
+  content: '';
+  position: absolute;
+  inset: 12px 10px 10px;
+  background:
+    radial-gradient(ellipse 4.5px 3px, #8c6a55 90%, transparent) 4px 1px / 62px 12px,
+    radial-gradient(ellipse 3.5px 2.5px, #8c6a55 90%, transparent) 30px 6px / 62px 12px,
+    radial-gradient(ellipse 4px 2.5px, #8c6a55 90%, transparent) 48px 0 / 62px 12px;
+  background-repeat: repeat-x;
+}
+
+.crate {
+  position: relative;
+  display: block;
+  height: 44px;
+  margin-top: -10px;
+  border: var(--border);
+  border-radius: 9px;
+  /* deux lattes en façade */
+  background:
+    linear-gradient(#9c6436, #9c6436) 0 33% / 100% 2.5px no-repeat,
+    linear-gradient(#9c6436, #9c6436) 0 68% / 100% 2.5px no-repeat,
+    #d99a5b;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+/* les poteaux d'angle */
+.crate::before,
+.crate::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  width: 20px;
+  border: var(--border);
+  border-radius: 6px;
+  background: #c0834a;
+}
+
+.crate::before {
+  left: 8px;
+}
+
+.crate::after {
+  right: 8px;
 }
 
 .sprout {
-  width: 30px;
-  height: 30px;
-  fill: var(--leaf);
+  position: absolute;
+  bottom: calc(100% - 16px);
+  left: calc(50% + 14px);
+  width: 78px;
+  height: 104px;
+  overflow: visible;
   stroke: var(--ink);
-  stroke-width: 1.6;
+  stroke-width: 1.4;
   stroke-linejoin: round;
 }
 
+/* au repos, seul le bas de la tige est tracé */
+.stem {
+  fill: none;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 26;
+  transition: stroke-dashoffset 0.5s cubic-bezier(0.34, 1.3, 0.64, 1) 0.15s;
+}
+
+.leaf,
+.bud {
+  transform-box: fill-box;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.leaf {
+  fill: var(--leaf);
+}
+
+/* chaque feuille s'ouvre depuis son point d'attache sur la tige */
+.leaf.left {
+  transform-origin: 100% 90%;
+}
+
+.leaf.right {
+  transform-origin: 0% 90%;
+}
+
+.leaf.top,
+.bud {
+  transform: scale(0);
+}
+
+.bud {
+  fill: var(--pink);
+  transform-origin: 50% 100%;
+}
+
+/* au survol : la tige monte, les feuilles du haut se déplient, puis le bouton éclot */
+.plot:hover .stem,
+.plot:focus-within .stem {
+  stroke-dashoffset: 0;
+  transition-delay: 0s;
+}
+
+.plot:hover .leaf.low,
+.plot:focus-within .leaf.low {
+  transform: scale(1.12);
+}
+
+.plot:hover .leaf.top,
+.plot:focus-within .leaf.top {
+  transform: scale(1);
+  transition-delay: 0.2s;
+}
+
+.plot:hover .bud,
+.plot:focus-within .bud {
+  transform: scale(1);
+  transition-delay: 0.38s;
+}
+
 .label h4 {
-  margin-top: 8px;
   font-family: var(--font-display);
   font-weight: 800;
   font-variation-settings: 'wdth' 75;
@@ -282,17 +547,28 @@ function onClosed() {
   text-underline-offset: 3px;
 }
 
-.label.empty {
+/* --- Terre libre : un emplacement vide, l'étiquette n'est pas encore plantée --- */
+.plot.empty .label {
+  justify-content: center;
+  margin-bottom: calc(var(--stake) - var(--buried));
   border-style: dashed;
   background: transparent;
   box-shadow: none;
 }
 
+.plot.empty .stake {
+  display: none;
+}
+
 .hole {
-  width: 30px;
-  height: 14px;
-  margin-top: 16px;
+  position: absolute;
+  z-index: 1;
+  top: 11px;
+  left: 50%;
+  width: 34px;
+  height: 10px;
   border-radius: 50%;
-  background: var(--soil);
+  background: rgb(0 0 0 / 0.4);
+  translate: -50% 0;
 }
 </style>

@@ -2,6 +2,9 @@
 // Ajouter un projet = ajouter un objet ici. S'il a un `salesify`, une petite racine
 // apparaît dans le potager avec son problème, et le projet devient son remède.
 
+import thumbCasseBrique from '../assets/images/thumb-casse-brique.webp'
+import thumbEggTimer from '../assets/images/thumb-egg-timer.webp'
+
 export type Accessory = 'headset' | 'bubble' | 'magnifier' | 'antenna' | 'heart'
 
 export type ProjectKind = 'pro' | 'etna' | 'weekend' | 'perso'
@@ -25,6 +28,8 @@ export type Project = {
   stack: string[]
   status?: string
   link?: { label: string; url: string }
+  /** Capture d'écran affichée sur l'étiquette des semis du weekend */
+  thumbnail?: string
   confidential?: boolean
   salesify?: Salesify
 }
@@ -146,6 +151,7 @@ export const projects: Project[] = [
     description: 'Raquette, balle, briques et collisions, dessinés à la main dans un canvas HTML.',
     stack: ['JavaScript', 'Canvas'],
     link: { label: 'Jouer', url: 'https://js-casse-brique-game.vercel.app/' },
+    thumbnail: thumbCasseBrique,
   },
   {
     id: 'egg-timer',
@@ -156,6 +162,7 @@ export const projects: Project[] = [
     description: 'Un minuteur à œufs animé et un peu absurde, pour un outil du quotidien.',
     stack: ['HTML', 'CSS', 'JavaScript'],
     link: { label: 'Essayer', url: 'https://egg-timer-gamma.vercel.app/' },
+    thumbnail: thumbEggTimer,
   },
 ]
 
